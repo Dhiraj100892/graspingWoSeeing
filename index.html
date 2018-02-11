@@ -33,59 +33,142 @@
       </body>
       </html>
       <p>
-      The Dexterity Network (Dex-Net) is a research project including code, datasets, and algorithms for generating datasets of synthetic point clouds, robot parallel-jaw grasps and metrics of grasp robustness based on physics for thousands of 3D object models to train machine learning-based methods to plan robot grasps.
-      The broader goal of the Dex-Net project is to develop highly reliable robot grasping across a wide variety of rigid objects such as tools, household items, packaged goods, and industrial parts.
+Hi there. Here you can find documentation regarding the dataset collected and evaluated in blah blah . It contains haptic, visual and kinematic data on about 8000 grasp interactions on diverse objects collected with a multi-fingered underactuated adaptive gripper.<br /><br />
+There are two main subsets of the data:
+<ul>
+<li> 52 diverse objects with labels (material, object) with 50-60 trials per object. Each trial has exactly 2 grasps (initial grasp + re-grasp)</li>
+<li>A miscellaneous unlabelled set of objects, where each trial has an arbitrary number of grasps (initial grasp + 2-3 re-grasps). </li>
+</ul>
       </p>
+  
       <p>
-      <a href="#dexnet_2">Dex-Net 2.0</a> is designed to generated training datasets to learn Grasp Quality Convolutional Neural Networks (GQ-CNN) models that predict the probability of success of candidate parallel-jaw grasps on objects from point clouds.
-      GQ-CNNs may be useful for quickly planning grasps that can lift and transport a wide variety of objects a physical robot.
-      <a href="#dexnet_21">Dex-Net 2.1</a> adds dynamic simulation with <a href="https://pypi.python.org/pypi/pybullet">pybullet</a> and extends the robust grasping model to the sequential task of bin picking.
-      <a href="#dexnet_3">Dex-Net 3.0</a> adds support for suction-based end-effectors.
-      <a href="#dexnet_1">Dex-Net 1.0</a> was designed for distributed robust grasp analysis in the Cloud across datasets of over 10,000 3D mesh models.
-      </p>
-      <p>
-      The project was created by <a href="http://www.jeff-mahler.com">Jeff Mahler</a> and <a href="http://goldberg.berkeley.edu">Prof. Ken Goldberg</a> and is currently maintained by the <a href="http://autolab.berkeley.edu/">Berkeley AUTOLAB</a>.
-      For more info, <a href="#contact">contact us</a>.      
-      </p>
+      <h3 class="header" id="links" ><font color="black">Matrial Labels</font></h3>
+<html>
+<head>
+<style>
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+}
+th {
+    text-align: left;
+}
+</style>
+</head>
+<body>
 
-      <h2 class="header" id="links" ><font color="black">Project Links</font></h2>
-      <p>
+<table style="width:50%">
+  <tr>
+    <th>Label</th>
+    <th>Material Type</th> 
+  </tr>
+  <tr>
+    <td>0</td>
+    <td>Hard Plastic</td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>Stuffed Fabric</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>Metal</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>Wood</td> 
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>Ceramic</td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td>Glass</td>
+  </tr>
+  <tr>
+    <td>6</td>
+    <td>Elastic Plastic</td>
+  </tr>
 
-      <h3 class="header" id="links" ><font color="black">Datasets</font></h3>
-      <ul>
-      <li> <a href="http://bit.ly/2rIM7Jk">GQ-CNN Training Datasets</a> </li>
-      <li> <a href="http://bit.ly/2tAFMko">Pre-trained GQ-CNN Models</a> </li>
-      <li> <a href="http://bit.ly/2tLnRrQ">Object Mesh Dataset v1.1</a> </li>
-      <li> <a href="http://bit.ly/2vb3OCz">HDF5 Database of 3D Objects, Parallel-Jaw Grasps for YuMi, and Robustness Metrics</a> </li>
-      </ul>
+</table>
 
-      <h3 class="header" id="links" ><font color="black">Code</font></h3>
-      <ul>
-      <li> <a href="https://github.com/BerkeleyAutomation/gqcnn">GQ-CNN Python Training Code</a> (<a href="https://berkeleyautomation.github.io/gqcnn">Documentation</a>)</li>
-      <li> <a href="https://github.com/BerkeleyAutomation/dex-net">Dex-Net Database Python API</a> (<a href="https://berkeleyautomation.github.io/dex-net/code.html">Documentation</a>)</li>
-      </ul>
+</body>
+</html>
+ 
+      <h3 class="header" id="links" ><font color="black">Structure of dataset</font></h3>
+      For a given object X and trial Y, here’s the folder structure
+<ul>
+  <li> obj_X/
+    <ul>
+      <li>metadata
+      <li>material
+      <li>trail_Y/
+        <ul>
+          <li>data.p
+          <li>haptics/
+	  <li>images/
+          </li>          
+        </ul>
+      </li>  
+  </ul>
+  </li>
+</ul>	
+     The folder haptics/ contains the bag files with raw sensor data recordings and a plot of their data.<br />
+     All other data related to the trial can be found in data.p. An example is shown below:
+<ul>
+  <li> obj_X/
+    <ul>
+      <li>delta : # re-grasp params  [x, y, z  in meters, theta in radians], 1 is initial grasp <br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&emsp;  1: [0.018, 0.028, -0.213, -0.083] <br />
+		  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&emsp; 2: [-0.008, -0.0149, 0.0225, -0.030] <br />
 
-      <h3 class="header" id="links" ><font color="black">Other</font></h3>
-      <ul>
-      <li> <a href="http://bair.berkeley.edu/blog/2017/06/27/dexnet-2.0/">BAIR Blog Post</a> </li>
-      <li> <a href="http://autolab.berkeley.edu">Berkeley AUTOLAB</a> </li>
-      </ul>
-      </p>
+      <li>f &emsp; &nbsp;&nbsp;&nbsp;: # Robotiq finger positions (range 0-255), ‘B’ is the middle finger <br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&emsp;  1: {'A': 47, 'B': 57, 'C': 46, 'all': 47} <br />
+		  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&emsp;  2: {'A': 58, 'B': 68, 'C': 58, 'all': 58} <br />
 
-      <h2 class="header" id="contact"><font color="black">Contributors</font></h2>
+      <li>grasp_success_contact : # Before lifting object <br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&emsp;  True <br />
 
-      <a href="http://adithyamurali.com/">Adithya Murali</a>, Matt Matl, Bill DeRose, Jacky Liang, Alan Li, Vishal Satish, and <a href="http://goldberg.berkeley.edu">Ken Goldberg</a>.</p>
+      <li>grasp_success_final : # After lifting object <br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&emsp;  False <br />
 
-      <p>Past contributors include:<br>
-      <a href="http://www.cs.berkeley.edu/~ftpokorny/">Florian Pokorny</a>, Brian Hou, Sherdil Niyaz, Xinyu Liu, Melrose Roderkick, <a href="http://imagine.enpc.fr/~aubrym/index.html">Mathieu Aubry</a>, Michael Laskey, Richard Doan, Brenton Chu, Raul Puri, Sahanna Suri, Nikhil Sharma, and Josh Price.</p>
+      <li>h &emsp; &nbsp;&nbsp;&nbsp;: # See https://arxiv.org/abs/1708.01354 <br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&emsp;  0.2<br />
 
-      <h3>
-      <a id="support-or-contact" class="anchor" href="#support-or-contact" aria-hidden="true"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+      <li>initial_haptics_bias : # Initial bias for <br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&emsp; 'left': [-0.006, -0.006, -0.002]<br />
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&emsp;'middle': [-0.007, -0.002, -0.023]<br />
+  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&emsp;'right': [-0.01 , -0.007,  0.016] <br />
 
-      <p>Please Contact <a href="http://www.jeff-mahler.com">Jeff Mahler</a> (<a href="mailto:jmahler@berkeley.edu">email</a>) or <a href="goldberg.berkeley.edu">Prof. Ken Goldberg</a> (<a href="mailto:goldberg@berkeley.edu">email</a>) of the <a href="http://autolab.berkeley.edu/">AUTOLAB</a> at UC Berkeley.</p>
+      <li>mode : # There are 3 modes for the Robotiq gripper (see paper) <br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&emsp;  1 <br />
+
+      <li>num_grasps : # Total number of grasps, including initial grasp <br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&emsp;  2 <br />
+
+      <li>theta : # theta (in radians) of initial planar grasp, i.e. angle about vertical axis <br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&emsp;  -1.75 <br />
+
+      <li>x : #  Object location with respect to robot base link <br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&emsp;  0.557 <br />
+
+      <li>y : #  Object location with respect to robot base link <br />
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&emsp;  0.101 <br />
+      </li>  
+  </ul>
+  </li>
+</ul>      </p>
+
+      <h3 class="header" id="contact"><font color="black">Contributors</font></h3>
+
+      <a href="http://adithyamurali.com/">Adithya Murali</a>, <a href="http://yinli.cvpr.net/">Yin Li</a>, Dhiraj Gandhi, <a href="http://www.cs.cmu.edu/~abhinavg/">Abhinav Gupta</a></p>
+
       </section>
     </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
 		
   </body>
 </html>
