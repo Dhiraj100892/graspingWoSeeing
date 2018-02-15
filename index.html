@@ -15,13 +15,13 @@
         <h1 class="header"><a href="https://dhiraj100892.github.io/graspingWoSeeing/">Grasping Without Seeing</a></h1>
         <p class="header"></p>
 
-        <h2 class="header"><a href="https://dhiraj100892.github.io/graspingWoSeeing/">ArXiv</a></h2>
+        <h2 class="header"><a href="https://dhiraj100892.github.io/graspingWoSeeing/">arXiv</a></h2>
         <p class="header"></p>
 
-        <h2 class="header"><a href="https://dhiraj100892.github.io/graspingWoSeeing/">Code</a></h2>
+       	<h2 class="header"><a href="#data">Data</a></h2>
         <p class="header"></p>
-	
-       	<h2 class="header"><a href="https://dhiraj100892.github.io/graspingWoSeeing/">Data</a></h2>
+
+        <h2 class="header"><a href="#contact">Contact</a></h2>
         <p class="header"></p>
 
       </header>
@@ -33,141 +33,38 @@
       </body>
       </html>
       <p>
-      <br /> 
-      <br />
-Hi there. Here you can find documentation regarding the dataset collected and evaluated in blah blah . It contains haptic, visual and kinematic data on about 8000 grasp interactions on diverse objects collected with a multi-fingered underactuated adaptive gripper.<br /><br />
+      <br/>
+      <br/>
+
+<h1>Overview</h1>
+
+How can a robot grasp an unknown object without seeing it? In this paper, we present an attempt for grasping novel objects using tactile sensing and without prior knowledge of the objects' location or physical properties. Our key idea is to combine touch based object localization with tactile based re-grasping. To train our learning models, we created a large-scale grasping dataset with haptic recordings, images and material labels. For haptic representation, we propose an unsupervised auto-encoding scheme for learning haptic features, which shows a significant improvement over prior methods on a variety of tactile perception tasks. First, our touch localization model sequentially ``touch-scans'' the workspace and uses a particle filter to aggregate beliefs from multiple hits of the target. It outputs an estimate of the object's location, from which an initial grasp is established. Next, our re-grasping model learns to progressively improve grasps with haptic feedback based on the learnt features. This network learns to estimate grasp stability and predict adjustment for next grasp. Re-grasping thus is performed iteratively until our model identifies a stable grasp. Finally, we demonstrate extensive experimental results on grasping a novel set of objects using a real world manipulator. 
+
+<h1 id="data">Data</h1>
+
+Here you can find documentation regarding the dataset collected. It contains haptic, visual and kinematic data on about 7800 grasp interactions on diverse objects collected with a multi-fingered underactuated adaptive gripper. The full dataset can be downloaded <a href="http://adithyamurali.com/">here</a>. A visualization of a sample of the data and more detailed information is given below.
+</p>
+
+            <img src="data.png" width=620 height=500>
+
+<p>
 There are two main subsets of the data:
 <ul>
 <li> 52 diverse objects with labels (material, object) with 50-60 trials per object. Each trial has exactly 2 grasps (initial grasp + re-grasp)</li>
 <li>A miscellaneous unlabelled set of objects, where each trial has an arbitrary number of grasps (initial grasp + 2-3 re-grasps). </li>
 </ul>
-      </p>
-  
-      <p>
-      <h3 class="header" id="links" ><font color="black">Matrial Labels</font></h3>
-<html>
-<head>
-<style>
-table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-}
-th, td {
-    padding: 5px;
-}
-th {
-    text-align: left;
-}
-</style>
-</head>
-<body>
+Detailed information on how the data is structured internally can be found in the <a href="http://adithyamurali.com/">README</a>.
+</p>
 
-<table style="width:50%">
-  <tr>
-    <th>Label</th>
-    <th>Material Type</th> 
-  </tr>
-  <tr>
-    <td>0</td>
-    <td>Hard Plastic</td>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td>Stuffed Fabric</td>
-  </tr>
-  <tr>
-    <td>2</td>
-    <td>Metal</td>
-  </tr>
-  <tr>
-    <td>3</td>
-    <td>Wood</td> 
-  </tr>
-  <tr>
-    <td>4</td>
-    <td>Ceramic</td>
-  </tr>
-  <tr>
-    <td>5</td>
-    <td>Glass</td>
-  </tr>
-  <tr>
-    <td>6</td>
-    <td>Elastic Plastic</td>
-  </tr>
 
-</table>
+<h1 id="paper">Paper</h1>
+The paper can be downloaded from <a href="http://adithyamurali.com/"> arXiv</a>.
 
-</body>
-</html>
- 
-      <h3 class="header" id="links" ><font color="black">Structure of dataset</font></h3>
-      For a given object X and trial Y, here’s the folder structure
-<ul>
-  <li> obj_X/
-    <ul>
-      <li>metadata
-      <li>material
-      <li>trail_Y/
-        <ul>
-          <li>data.p
-          <li>haptics/
-	  <li>images/
-          </li>          
-        </ul>
-      </li>  
-  </ul>
-  </li>
-</ul>	
-     The folder haptics/ contains the bag files with raw sensor data recordings and a plot of their data.<br />
-     All other data related to the trial can be found in data.p. An example is shown below:
-<ul>
-  <li> obj_X/
-    <ul>
-      <li>delta : # re-grasp params  [x, y, z  in meters, theta in radians], 1 is initial grasp <br />
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&emsp;  1: [0.018, 0.028, -0.213, -0.083] <br />
-		  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&emsp; 2: [-0.008, -0.0149, 0.0225, -0.030] <br />
-
-      <li>f &emsp; &nbsp;&nbsp;&nbsp;: # Robotiq finger positions (range 0-255), ‘B’ is the middle finger <br />
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&emsp;  1: {'A': 47, 'B': 57, 'C': 46, 'all': 47} <br />
-		  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&emsp;  2: {'A': 58, 'B': 68, 'C': 58, 'all': 58} <br />
-
-      <li>grasp_success_contact : # Before lifting object <br />
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&emsp;  True <br />
-
-      <li>grasp_success_final : # After lifting object <br />
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&emsp;  False <br />
-
-      <li>h &emsp; &nbsp;&nbsp;&nbsp;: # See https://arxiv.org/abs/1708.01354 <br />
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&emsp;  0.2<br />
-
-      <li>initial_haptics_bias : # Initial bias for <br />
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&emsp; 'left': [-0.006, -0.006, -0.002]<br />
-  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&emsp;'middle': [-0.007, -0.002, -0.023]<br />
-  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&emsp;'right': [-0.01 , -0.007,  0.016] <br />
-
-      <li>mode : # There are 3 modes for the Robotiq gripper (see paper) <br />
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&emsp;  1 <br />
-
-      <li>num_grasps : # Total number of grasps, including initial grasp <br />
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&emsp;  2 <br />
-
-      <li>theta : # theta (in radians) of initial planar grasp, i.e. angle about vertical axis <br />
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&emsp;  -1.75 <br />
-
-      <li>x : #  Object location with respect to robot base link <br />
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&emsp;  0.557 <br />
-
-      <li>y : #  Object location with respect to robot base link <br />
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&emsp;  0.101 <br />
-      </li>  
-  </ul>
-  </li>
-</ul>      </p>
-
-      <h3 class="header" id="contact"><font color="black">Contributors</font></h3>
+      <h1 id="contact"><font color="black">Contributors</font></h1>
 
       <a href="http://adithyamurali.com/">Adithya Murali</a>, <a href="http://yinli.cvpr.net/">Yin Li</a>, Dhiraj Gandhi, <a href="http://www.cs.cmu.edu/~abhinavg/">Abhinav Gupta</a></p>
+
+      <b>Contact</b>: amurali AT andrew DOT cmu DOT edu
 
       </section>
     </div>
