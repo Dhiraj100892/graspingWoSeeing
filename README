@@ -1,0 +1,60 @@
+Detailed information about how the data is organized.
+
+Structure of dataset
+====================
+For a given object X and trial Y, here’s the folder structure
+obj_X/
+  metadata, material, trial_Y/
+                        data.p, haptics/, images/
+
+The folder haptics/ contains the bag files with raw sensor data recordings and a plot of their data.
+
+
+Structure of data file
+====================
+All other data related to the trial can be found in the picklefile called data.p. An example, and the description of each value, is shown below:
+
+{
+  'delta':
+    {           # re-grasp params  [x, y, z  in meters, theta in radians], 1 is initial grasp
+      1: [0.018, 0.028, -0.213, -0.083],
+      2: [-0.008, -0.0149, 0.0225, -0.030]
+    },
+  'f': 
+    {          # Robotiq finger positions (range 0-255), ‘B’ is the middle finger
+      1: {'A': 47, 'B': 57, 'C': 46, 'all': 47},
+      2: {'A': 58, 'B': 68, 'C': 58, 'all': 58}
+    },
+ 'grasp_success_contact':  #Before lifting object
+    True,
+ 'grasp_success_final': #After lifting object
+    False,
+ 'h': # See https://arxiv.org/abs/1708.01354
+    0.20,   
+ 'initial_haptic_bias':
+    {     # Initial bias for 
+      'left': [-0.006, -0.006, -0.002],
+      'middle': [-0.007, -0.002, -0.023],
+      'right': [-0.01 , -0.007,  0.016]
+    },
+ 'mode': # There are 3 modes for the Robotiq gripper (see paper)
+    1,
+ 'num_grasps': # total number of grasps, including initial grasp
+    2,
+ 'theta': # theta (in radians) of initial planar grasp, i.e. angle about vertical axis
+    -1.75,
+ 'x': # Object location with respect to robot base link
+    0.557,
+ 'y': # Object location with respect to robot base link
+    0.101
+}
+
+Material label index
+====================
+0 Hard plastic
+1 Stuffed Fabric 
+2 Metal
+3 Wood
+4 Ceramic
+5 Glass
+6 Elastic Plastic
